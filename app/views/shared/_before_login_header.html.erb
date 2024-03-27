@@ -11,9 +11,13 @@
     <!-- ハンバーガーメニュー内のリンク -->
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav ms-auto main-nav align-items-center">
-        <!-- ログアウトページへのリンク -->
+        <!-- ログインページへのリンク -->
         <li class="nav-item">
-          <%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class: "nav-link" %>
+          <%= link_to t('header.login'), login_path, class: "nav-link" %>
+        </li>
+        <!-- 会員登録ページへのリンク -->
+        <li class="nav-item">
+          <%= link_to t('header.create'), new_user_path, class: "nav-link" %>
         </li>
       </ul>
     </div>
