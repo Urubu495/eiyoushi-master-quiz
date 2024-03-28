@@ -18,6 +18,7 @@ RUN gem install bundler
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
 COPY yarn.lock /app/yarn.lock
+RUN apt-get update && apt-get install -y python3 python3-pip
 RUN bundle install
 RUN yarn install
 COPY . /app
