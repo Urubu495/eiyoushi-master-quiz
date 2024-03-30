@@ -54,6 +54,7 @@ gem 'sorcery'
 gem 'rails-i18n', '~> 7.0.0'
 gem 'bootstrap', '~> 5.3.0'
 gem 'jquery-rails'
+gem 'pdf-reader'
 
 # gem "image_processing", "~> 1.2"
 
