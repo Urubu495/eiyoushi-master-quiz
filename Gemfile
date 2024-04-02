@@ -55,6 +55,7 @@ gem 'rails-i18n', '~> 7.0.0'
 gem 'bootstrap', '~> 5.3.0'
 gem 'jquery-rails'
 gem 'pdf-reader'
+gem 'carrierwave', '~> 2.0'
 
 # gem "image_processing", "~> 1.2"
 

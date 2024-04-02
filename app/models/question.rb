@@ -7,4 +7,6 @@ class Question < ApplicationRecord
   has_many :saved_questions
   has_many :user_answers
   has_many :comments
+
+  mount_uploader :image, ImageUploader
 end
