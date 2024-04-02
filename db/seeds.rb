@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# カテゴリーデータ実装済み　load Rails.root.join('db', 'seeds', 'categories.rb')
+# 年度データ実装済み　load Rails.root.join('db', 'seeds', 'years.rb')
+# 頻出傾向データ実装済み　load Rails.root.join('db', 'seeds', 'question_trends.rb')
+load Rails.root.join('db', 'seeds', 'questions_37(1).rb')

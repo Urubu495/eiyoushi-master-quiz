@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_20_044745) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_01_054543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_044745) do
     t.boolean "is_answer", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
     t.index ["question_id"], name: "index_choices_on_question_id"
   end
 
@@ -56,6 +57,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_20_044745) do
     t.text "content", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image"
+    t.integer "question_number", null: false
     t.index ["category_id"], name: "index_questions_on_category_id"
     t.index ["question_trend_id"], name: "index_questions_on_question_trend_id"
     t.index ["year_id"], name: "index_questions_on_year_id"
