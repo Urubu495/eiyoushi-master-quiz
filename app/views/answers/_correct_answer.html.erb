@@ -1,0 +1,4 @@
+<div id="answer_frame">
+  <p>正解です！</p>
+  <%= button_to "次の問題へ", question_path(@next_question_id), method: :get, data: { turbo_frame: "answer_frame" } %>
+</div>
