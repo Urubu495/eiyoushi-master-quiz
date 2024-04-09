@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'questions/create', to: 'questions#create', as: 'questions_create'
   resources :questions, only: [:show]
   post 'answers', to: 'answers#create', as: 'your_answer'
+  get 'results', to: 'results#show'
 
   post 'questions/:id/save', to: 'questions#save', as: 'your_save_question'
 end
