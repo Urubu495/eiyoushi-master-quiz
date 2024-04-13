@@ -38,9 +38,21 @@ class QuestionsController < ApplicationController
       selected_questions = questions.limit(number_of_questions)
     end
   
-    session[:questions] = selected_questions.map(&:id)
-    
-    first_question_id = session[:questions].first
+    # セッションを開始
+    user_session = Session.create!(user_id: current_user.id, status: 'in_progress', started_at: Time.current)
+    session[:current_session_id] = user_session.id
+
+    # 選ばれた問題をSessionQuestionsテーブルに保存
+    selected_questions.each do |question|
+      SessionQuestion.create(session_id: user_session.id, question_id: question.id, is_answered: false)
+    end
+
+    # 選ばれた問題のIDをセッションに保存
+    question_ids = selected_questions.map(&:id)
+    session[:questions] = question_ids
+
+    # 最初の問題にリダイレクト
+    first_question_id = selected_questions.first
     redirect_to question_path(first_question_id)
   end
 
@@ -48,7 +60,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @choices = @question.choices
     @trend_level = QuestionTrend.find(@question.question_trend_id).trend_level
-  end
+  end        
 
   private
   
