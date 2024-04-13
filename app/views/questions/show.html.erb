@@ -1,0 +1,35 @@
+<div class='container mt-3'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <h1>問題番号: <%= @question.year.year %> - <%= @question.question_number %></h1>
+      <p>出題傾向: ☆<%= @trend_level %></p>
+      <%= button_to 'この問題を保存する', your_save_question_path(@question), method: :post, class: 'btn btn-primary btn-lg' %>
+    </div>
+  </div>
+  <div class='row mt-2'>
+    <div class='col-md-12'>
+      <p><%= @question.content %></p>
+      <% if @question.image.present? %>
+        <%= image_tag @question.image.url %>
+      <% end %>
+    </div>
+  </div>
+  <div class='row mt-2'>
+    <div class='col-md-12'>
+      <%= form_with url: your_answer_path, local: false do |f| %>
+        <% @choices.each do |choice| %>
+          <div>
+          <%= f.radio_button :choice_id, choice.id %>
+          <%= choice.content %>
+          <% if choice.image.present? %>
+              <%= image_tag choice.image %>
+          <% end %>
+          </div>
+        <% end %>
+        <div id="answer_button">
+          <%= f.submit "回答する", class: 'btn btn-primary btn-block btn-lg' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

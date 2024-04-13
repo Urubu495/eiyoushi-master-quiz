@@ -1,0 +1,39 @@
+ja:
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+    label:
+      email: メールアドレス
+      password: パスワード
+      password_confirmation: パスワード確認
+  header:
+    home: ホーム
+    login: ログイン
+    logout: ログアウト
+    create: 会員登録
+  users:
+    new:
+      title: 'ユーザー登録'
+      to_login_page: 'ログインページへ'
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 登録ページへ
+      password_forget: パスワードをお忘れの方はこちら
+  categories:
+    names:
+      '1': '社会・環境と健康'
+      '2': '人体の構造と機能及び疾病の成り立ち'
+      '3': '食べ物と健康'
+      '4': '基礎栄養学'
+      '5': '応用栄養学'
+      '6': '栄養教育論'
+      '7': '臨床栄養学'
+      '8': '公衆栄養学'
+      '9': '給食経営管理論'
+      '10': '応用力試験'
+  sessions:
+    destroy: '削除しました'
