@@ -31,6 +31,17 @@ def create
     end
   end
 
+  if current_user.present?
+    # UserAnswersに回答履歴を追加
+    UserAnswer.create(
+      user_id: current_user.id,
+      question_id: current_question_id,
+      choice_id: choice.id,
+      is_correct: choice.is_answer?,
+      answered_at: Time.current
+    )
+  end
+
   if choice.is_answer
     render turbo_stream: turbo_stream.replace("answer_button", partial: "correct_answer")
   else
