@@ -1,6 +1,19 @@
 class AnswersController < ApplicationController
   skip_before_action :require_login, only: %i[create]
 
+def index
+  @user_answers = UserAnswer.includes(question: :category).where(user_id: current_user.id).order(answered_at: :desc)
+
+  if params[:category_id].present?
+    mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
+    @user_answers = @user_answers.where(questions: {categories: {id: mid_category_ids}})
+  end
+
+  if params[:is_correct].present?
+    @user_answers = @user_answers.where(is_correct: params[:is_correct])
+  end
+end
+
 def create
   choice = Choice.find(params[:choice_id])
   question_ids = session[:questions]
@@ -47,6 +60,12 @@ def create
   else
     render turbo_stream: turbo_stream.replace("answer_button", partial: "wrong_answer", locals: {next_question_id: @next_question_id, correct_choice_index: correct_choice_index})
   end
+end
+
+def destroy
+  user_answer = current_user.user_answers.find(params[:id])
+  user_answer.destroy
+  redirect_to answers_path, danger: t('user_answers.destroy.success')
 end
 
 end
