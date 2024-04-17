@@ -8,7 +8,7 @@
   <% @sessions.each do |session| %>
     <% if session.in_progress? %>
       <div class="row mb-4">
-      <div class="col-md-4"><%= session.started_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %></div>
+      <div class="col-md-4"><%= session.started_at.strftime("%Y-%m-%d %H:%M:%S") %></div>
         <div class="col-md-2">
           <%= link_to '回答', resume_session_link(session.id), class: 'btn btn-primary' %>
         </div>

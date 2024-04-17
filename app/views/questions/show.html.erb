@@ -16,7 +16,7 @@
   </div>
   <div class='row mt-2'>
     <div class='col-md-12'>
-      <%= form_with url: your_answer_path, local: false do |f| %>
+      <%= form_with url: answers_path, local: false do |f| %>
         <% @choices.each do |choice| %>
           <div>
           <%= f.radio_button :choice_id, choice.id %>
@@ -35,8 +35,9 @@
   <% if current_user.present? %>
     <div class="row">
       <div class="col-md-4">問題数: <%= @total_questions %></div>
-      <div class="col-md-4">正解数: <%= @correct_answers %></div>
-      <div class="col-md-4">不正解数: <%= @incorrect_answers %></div>
+      <div class="col-md-4">正解: <%= @correct_answers %></div>
+      <div class="col-md-4">不正解: <%= @incorrect_answers %></div>
     </div>
   <% end %>
+  <%= button_to "回答履歴へ", answers_path, method: :get, data: { turbo_frame: "answer_frame" }, class: 'btn btn-info btn-lg' %>
 </div>
