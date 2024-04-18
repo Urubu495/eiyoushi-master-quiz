@@ -3,7 +3,11 @@
     <div class='col-md-12'>
       <h1>問題番号: <%= @question.year.year %> - <%= @question.question_number %></h1>
       <p>出題傾向: ☆<%= @trend_level %></p>
-      <%= button_to 'この問題を保存する', your_save_question_path(@question), method: :post, class: 'btn btn-primary btn-lg' %>
+      <% if current_user.saved_questions.exists?(question_id: @question.id) %>
+        <%= button_to '保存を解除', saved_question_path(question_id: @question.id), method: :delete, class: 'btn btn-secondary btn-lg' %>
+      <% else %>
+        <%= button_to 'この問題を保存する', saved_questions_path(question_id: @question.id), method: :post, class: 'btn btn-primary btn-lg' %>
+      <% end %>
     </div>
   </div>
   <div class='row mt-2'>
@@ -39,5 +43,8 @@
       <div class="col-md-4">不正解: <%= @incorrect_answers %></div>
     </div>
   <% end %>
-  <%= button_to "回答履歴へ", answers_path, method: :get, data: { turbo_frame: "answer_frame" }, class: 'btn btn-info btn-lg' %>
+  <div class="d-flex justify-content-start">
+    <%= button_to "回答履歴へ", answers_path, method: :get, class: 'btn btn-info btn-lg' %>
+    <%= button_to "保存問題へ", saved_questions_path, method: :get, class: 'btn btn-secondary btn-lg button-space-left' %>
+  </div>
 </div>

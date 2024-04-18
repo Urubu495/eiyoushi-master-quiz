@@ -37,3 +37,8 @@ ja:
       '10': '応用力試験'
   sessions:
     destroy: '削除しました'
+  saved_questions:
+    create:
+      success: '問題を保存しました。'
+    destroy:
+      success: '問題の保存を解除しました。'
