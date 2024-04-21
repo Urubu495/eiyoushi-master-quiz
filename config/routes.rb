@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   
   get 'questions/setting', to: 'questions#setting', as: 'questions_setting'
   post 'questions/create', to: 'questions#create', as: 'questions_create'
-  resources :questions, only: [:show]
+  get 'questions/index37', to: 'questions#index37', as: 'questions_index37'
+  resources :questions, only: [:show, :index]
   resources :answers, only: [:index, :create, :destroy]
   get 'results', to: 'results#show'
   get 'results/before_login_show', to: 'results#before_login_show', as: 'before_login_show'
