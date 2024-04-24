@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   skip_before_action :require_login, only: %i[create]
 
 def index
-  @user_answers = UserAnswer.includes(question: :category).where(user_id: current_user.id).order(answered_at: :desc)
+  @user_answers = UserAnswer.includes(question: :category).where(user_id: current_user.id).order(answered_at: :desc).page(params[:page])
 
   if params[:category_id].present?
     mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
