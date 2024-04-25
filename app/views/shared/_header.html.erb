@@ -1,8 +1,13 @@
 <header>
-  <nav class="navbar navbar-expand-lg navigation navbar-light bg-light">
+  <nav class="navbar navigation navbar-light bg-light">
 
     <!-- ホーム画面へ戻るボタン -->
     <%= link_to t('header.home'), root_path, class: "navbar-brand" %>
+
+    <!-- ユーザー名の表示 -->
+      <div class="navbar-text mx-auto">
+        <%= current_user.name %>
+      </div>
 
     <!-- ハンバーガーメニューボタン -->
     <button class='navbar-toggler' data-toggle='collapse' data-target='#navbarToggler' aria-controls='navbarToggler' aria-expanded='false' aria-label='Toggle navigation'>
@@ -11,6 +16,10 @@
     <!-- ハンバーガーメニュー内のリンク -->
     <div class="collapse navbar-collapse" id="navbarToggler">
       <ul class="navbar-nav ms-auto main-nav align-items-center">
+        <!-- ユーザー名変更ページへのリンク -->
+        <li class="nav-item">
+          <%= link_to t('header.name_update'), edit_user_path(current_user), class: "nav-link" %>
+        </li>
         <!-- ログアウトページへのリンク -->
         <li class="nav-item">
           <%= link_to t('header.logout'), logout_path, data: { turbo_method: :delete }, class: "nav-link" %>
