@@ -13,10 +13,16 @@ ja:
     login: ログイン
     logout: ログアウト
     create: 会員登録
+    name_update: ユーザー名変更
   users:
     new:
       title: 'ユーザー登録'
       to_login_page: 'ログインページへ'
+    create:
+     success: ユーザーを作成しました
+     failure: ユーザー作成に失敗しました
+    update:
+     success: ユーザー名を変更しました
   user_sessions:
     new:
       title: ログイン
