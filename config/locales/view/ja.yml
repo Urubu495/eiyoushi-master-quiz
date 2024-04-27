@@ -8,6 +8,8 @@ ja:
       email: メールアドレス
       password: パスワード
       password_confirmation: パスワード確認
+  defaults:
+    password_reset: パスワードリセット
   header:
     home: ホーム
     login: ログイン
@@ -48,3 +50,11 @@ ja:
       success: '問題を保存しました。'
     destroy:
       success: '問題の保存を解除しました。'
+  password_resets:
+    new:
+      submit: 送信
+    create:
+      success: パスワードリセット手順を送信しました
+    update:
+      success: パスワードを変更しました
+      fail: パスワード変更に失敗しました
