@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root 'top#index'
   resources :users, only: [:new, :create, :edit, :update]
   
@@ -16,4 +17,6 @@ Rails.application.routes.draw do
   resources :sessions, only: [:index, :destroy]
   resources :saved_questions, only: [:index, :create, :destroy]
   get 'correct_answer_rates/rate', to: 'correct_answer_rates#rate', as: 'correct_answer_rate'
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 end
