@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root 'top#index'
   resources :users, only: [:new, :create, :edit, :update]
+  get 'edit_email', to: 'users#edit_email'
+  patch 'update_email', to: 'users#update_email'
+  get 'confirm_email', to: 'users#confirm_email', as: 'confirm_email'
   
   get 'login', to: 'user_sessions#new'
   post 'login', to: 'user_sessions#create'
