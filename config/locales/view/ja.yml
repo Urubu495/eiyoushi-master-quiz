@@ -10,12 +10,14 @@ ja:
       password_confirmation: パスワード確認
   defaults:
     password_reset: パスワードリセット
+    email_change: メールアドレス変更の確認
   header:
     home: ホーム
     login: ログイン
     logout: ログアウト
     create: 会員登録
     name_update: ユーザー名変更
+    email_change: メールアドレス変更
   users:
     new:
       title: 'ユーザー登録'
@@ -25,6 +27,12 @@ ja:
      failure: ユーザー作成に失敗しました
     update:
      success: ユーザー名を変更しました
+    update_email:
+      success: 確認メールを送信しました。メールを確認してください。
+    confirm_email:
+      success: メールアドレスが正しく更新されました。
+      failure: メールアドレスの更新に失敗しました。
+      time_limit: この確認リンクは無効か、すでに期限切れです。
   user_sessions:
     new:
       title: ログイン
