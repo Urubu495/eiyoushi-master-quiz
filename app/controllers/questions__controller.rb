@@ -75,7 +75,12 @@ class QuestionsController < ApplicationController
     @trend_level = QuestionTrend.find(@question.question_trend_id).trend_level
 
     if current_user.present?
-      @current_session = Session.find(session[:current_session_id])
+      session_id = params[:session_id]
+      if session_id.present?
+        @current_session = Session.find(session_id)
+      else
+        @current_session = Session.find(session[:current_session_id])
+      end
       @total_questions = @current_session.session_questions.count
       @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
       @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count

@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     if user_session
       first_unanswered_question = user_session.session_questions.where(is_answered: false).order(:id).first
       if first_unanswered_question
-        return question_path(first_unanswered_question.question_id)
+        return question_path(first_unanswered_question.question_id, session_id: session_id)
       end
     end
   end
