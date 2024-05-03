@@ -16,7 +16,14 @@ end
 
 def create
   choice = Choice.find(params[:choice_id])
-  question_ids = session[:questions]
+  if current_user.present? && params[:skip_session_process].blank?
+    # セッションIDを用いて現在のユーザーセッションを取得
+    user_session = Session.find_by(id: session[:current_session_id], user_id: current_user.id)
+    question_ids = user_session.session_questions.pluck(:question_id)
+  else
+    question_ids = session[:questions]
+  end
+  
   current_question_id = choice.question_id
   current_index = question_ids.index(current_question_id)
 
