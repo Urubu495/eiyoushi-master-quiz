@@ -38,21 +38,23 @@ class QuestionsController < ApplicationController
       selected_questions = questions.limit(number_of_questions)
     end
   
-    # セッションを開始
-    user_session = Session.create!(user_id: current_user.id, status: 'in_progress', started_at: Time.current)
-    session[:current_session_id] = user_session.id
+    if current_user.present?
+      # セッションを開始
+      user_session = Session.create!(user_id: current_user.id, status: 'in_progress', started_at: Time.current)
+      session[:current_session_id] = user_session.id
 
-    # 選ばれた問題をSessionQuestionsテーブルに保存
-    selected_questions.each do |question|
-      SessionQuestion.create(session_id: user_session.id, question_id: question.id, is_answered: false)
+      # 選ばれた問題をSessionQuestionsテーブルに保存
+      selected_questions.each do |question|
+        SessionQuestion.create(session_id: user_session.id, question_id: question.id, is_answered: false)
+      end
     end
-
+    
     # 選ばれた問題のIDをセッションに保存
     question_ids = selected_questions.map(&:id)
     session[:questions] = question_ids
 
     # 最初の問題にリダイレクト
-    first_question_id = selected_questions.first
+    first_question_id = session[:questions].first
     redirect_to question_path(first_question_id)
   end
 
@@ -60,6 +62,14 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @choices = @question.choices
     @trend_level = QuestionTrend.find(@question.question_trend_id).trend_level
+
+    if current_user.present?
+      @current_session = Session.find(session[:current_session_id])
+      @total_questions = @current_session.session_questions.count
+      @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
+      @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count
+    end
+    
   end        
 
   private
