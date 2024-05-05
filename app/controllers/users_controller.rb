@@ -14,6 +14,19 @@ class UsersController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     end
+
+    def edit
+      @user = current_user
+    end
+  
+    def update
+      @user = current_user
+      if @user.update(user_params)
+        redirect_to root_path, success: t('users.update.success')
+      else
+        render :edit
+      end
+    end
   
     private
   
