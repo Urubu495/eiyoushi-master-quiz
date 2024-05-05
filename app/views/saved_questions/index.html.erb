@@ -1,0 +1,29 @@
+<h1>保存した問題</h1>
+<%= form_with url: saved_questions_path, method: :get, local: true do |form| %>
+  <div class="row">
+    <div class="col-md">
+      <%= form.label :category_id, "分野" %>
+      <%= form.collection_select :category_id, Category.where(parent_id: nil), :id, 
+      ->(category){ t("categories.names.#{category.name}") }, 
+      include_blank: "すべての分野" %>
+      <%= form.submit "絞り込み" %>
+    </div>
+  </div>
+<% end %>
+
+<% @saved_questions.each do |saved_question| %>
+  <div class="bg-light mb-4">
+    <div class="col-md">
+      <p>問題番号: <%= saved_question.question.year.year %> - <%= saved_question.question.question_number %> | 出題傾向: ☆<%= saved_question.question.question_trend.trend_level %></p>
+    </div>
+    <div class="col-md">
+      <p>問題内容: <%= saved_question.question.content.truncate(80) %></p>
+    </div>
+    <div class="col-md">
+      <p>分野: <%= t("categories.names.#{saved_question.question.category.root_category.name}") %></p>
+    </div>
+    <div class="col-md">
+      <%= link_to '問題を表示', question_path(saved_question.question_id), class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
