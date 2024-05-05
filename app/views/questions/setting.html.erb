@@ -1,7 +1,9 @@
 <div class='container mt-3'>
   <div class='row'>
     <div class='col-md-12'>
-    <%= link_to '続きから出題', sessions_path %>
+    <% if current_user.present? %>
+      <%= link_to '続きから出題', sessions_path %>
+    <% end %>
       <h2>出題設定</h2>
     </div>
   </div>
