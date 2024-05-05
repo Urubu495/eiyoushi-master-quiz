@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   helper_method :resume_session_link
 
   def index
-    @sessions = current_user.sessions.order(created_at: :desc)
+    @sessions = current_user.sessions.order(created_at: :desc).page(params[:page])
   end
 
   def destroy
