@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   def index; end
 
   def index37
-    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 })
+    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).page(params[:page])
 
     if params[:category_id].present?
       mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
