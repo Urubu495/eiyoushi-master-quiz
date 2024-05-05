@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :questions, only: [:show]
   post 'answers', to: 'answers#create', as: 'your_answer'
   get 'results', to: 'results#show'
+  get 'results/before_login_show', to: 'results#before_login_show', as: 'before_login_show'
   resources :sessions, only: [:index,:destroy]
 
   post 'questions/:id/save', to: 'questions#save', as: 'your_save_question'
