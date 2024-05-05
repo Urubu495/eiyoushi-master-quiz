@@ -56,6 +56,9 @@ gem 'bootstrap', '~> 5.3.0'
 gem 'jquery-rails'
 gem 'pdf-reader'
 gem 'carrierwave', '~> 2.0'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
+gem 'whenever', require: false
 
 # gem "image_processing", "~> 1.2"
 
