@@ -4,6 +4,9 @@ class AnswersController < ApplicationController
 def index
   @user_answers = UserAnswer.includes(question: :category).where(user_id: current_user.id).order(answered_at: :desc).page(params[:page])
 
+  question_ids = @user_answers.map(&:id)
+  session[:questions] = question_ids unless session[:questions].present?
+
   if params[:category_id].present?
     mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
     @user_answers = @user_answers.where(questions: {categories: {id: mid_category_ids}})
@@ -16,13 +19,8 @@ end
 
 def create
   choice = Choice.find(params[:choice_id])
-  if current_user.present? && params[:skip_session_process].blank?
-    # セッションIDを用いて現在のユーザーセッションを取得
-    user_session = Session.find_by(id: session[:current_session_id], user_id: current_user.id)
-    question_ids = user_session.session_questions.pluck(:question_id)
-  else
-    question_ids = session[:questions]
-  end
+  
+  question_ids = session[:questions]
   
   current_question_id = choice.question_id
   current_index = question_ids.index(current_question_id)
@@ -34,7 +32,7 @@ def create
   end
 
   correct_choice = Choice.where(question_id: current_question_id, is_answer: true).first
-  correct_choice_index = Choice.where(question_id: current_question_id).order(:id).index(correct_choice) + 1
+  @correct_choice_index = Choice.where(question_id: current_question_id).order(:id).index(correct_choice) + 1
 
   # セッション内の現在の問題に対応するSessionQuestionを取得
   session_question = SessionQuestion.find_by(session_id: session[:current_session_id], question_id: current_question_id)
@@ -62,10 +60,17 @@ def create
     )
   end
 
-  if choice.is_answer
+  if params[:questions_index].present?
+    render turbo_stream: turbo_stream.replace("answer_button", partial: "questions_index")
+  elsif params[:saved_questions_index].present?
+    render turbo_stream: turbo_stream.replace("answer_button", partial: "saved_questions_index")
+  elsif params[:answers_index].present?
+    render turbo_stream: turbo_stream.replace("answer_button", partial: "answers_index")
+
+  elsif choice.is_answer
     render turbo_stream: turbo_stream.replace("answer_button", partial: "correct_answer")
   else
-    render turbo_stream: turbo_stream.replace("answer_button", partial: "wrong_answer", locals: {next_question_id: @next_question_id, correct_choice_index: correct_choice_index})
+    render turbo_stream: turbo_stream.replace("answer_button", partial: "wrong_answer", locals: {next_question_id: @next_question_id, correct_choice_index: @correct_choice_index})
   end
 end
 
