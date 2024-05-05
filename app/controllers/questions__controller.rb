@@ -1,7 +1,18 @@
 class QuestionsController < ApplicationController
-  skip_before_action :require_login, only: %i[setting create show]
+  skip_before_action :require_login, only: %i[setting create show index]
 
   def setting; end
+
+  def index; end
+
+  def index37
+    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 })
+
+    if params[:category_id].present?
+      mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
+      @questions = @questions.where(questions: {categories: {id: mid_category_ids}})
+    end
+  end
 
   def create
     number_of_questions = question_params[:number_of_questions].to_i
