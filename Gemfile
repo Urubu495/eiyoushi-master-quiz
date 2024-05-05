@@ -58,6 +58,7 @@ gem 'pdf-reader'
 gem 'carrierwave', '~> 2.0'
 gem 'kaminari'
 gem 'config'
+gem 'devise'
 gem 'bootstrap5-kaminari-views'
 gem 'whenever', require: false
 
