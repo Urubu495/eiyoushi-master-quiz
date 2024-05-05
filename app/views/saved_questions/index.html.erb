@@ -23,7 +23,7 @@
       <p>分野: <%= t("categories.names.#{saved_question.question.category.root_category.name}") %></p>
     </div>
     <div class="col-md">
-      <%= link_to '問題を表示', question_path(saved_question.question_id), class: 'btn btn-primary' %>
+      <%= link_to '問題を表示', question_path(saved_question.question_id, skip_session_process: 1, saved_questions_index: 1), class: 'btn btn-primary' %>
     </div>
   </div>
 <% end %>

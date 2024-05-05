@@ -3,10 +3,12 @@
     <div class='col-md-12'>
       <h1>問題番号: <%= @question.year.year %> - <%= @question.question_number %></h1>
       <p>出題傾向: ☆<%= @trend_level %></p>
-      <% if current_user.saved_questions.exists?(question_id: @question.id) %>
-        <%= button_to '保存を解除', saved_question_path(question_id: @question.id), method: :delete, class: 'btn btn-secondary btn-lg' %>
-      <% else %>
-        <%= button_to 'この問題を保存する', saved_questions_path(question_id: @question.id), method: :post, class: 'btn btn-primary btn-lg' %>
+      <% if current_user.present? %>
+        <% if current_user.saved_questions.exists?(question_id: @question.id) %>
+          <%= button_to '保存を解除', saved_question_path(question_id: @question.id), method: :delete, class: 'btn btn-secondary btn-lg' %>
+        <% else %>
+          <%= button_to 'この問題を保存する', saved_questions_path(question_id: @question.id), method: :post, class: 'btn btn-primary btn-lg' %>
+        <% end %>
       <% end %>
     </div>
   </div>
@@ -21,6 +23,19 @@
   <div class='row mt-2'>
     <div class='col-md-12'>
       <%= form_with url: answers_path, local: false do |f| %>
+
+        <% if params[:skip_session_process].present? %>
+          <%= f.hidden_field :skip_session_process, value: params[:skip_session_process] %>
+        <% end %>
+
+        <% if params[:questions_index].present? %>
+          <%= f.hidden_field :questions_index, value: params[:questions_index] %>
+        <% elsif params[:saved_questions_index].present? %>
+          <%= f.hidden_field :saved_questions_index, value: params[:saved_questions_index] %>
+        <% elsif params[:answers_index].present? %>
+          <%= f.hidden_field :answers_index, value: params[:answers_index] %>
+        <% end %>
+
         <% @choices.each do |choice| %>
           <div>
           <%= f.radio_button :choice_id, choice.id %>
@@ -30,8 +45,9 @@
           <% end %>
           </div>
         <% end %>
+        
         <div id="answer_button">
-          <%= f.submit "回答する", class: 'btn btn-primary btn-block btn-lg' %>
+          <%= f.submit "回答する", class: 'btn btn-primary btn-block btn-lg mb-3' %>
         </div>
       <% end %>
     </div>
