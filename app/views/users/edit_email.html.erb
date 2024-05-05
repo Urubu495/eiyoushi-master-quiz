@@ -1,0 +1,13 @@
+<h1>メールアドレス変更</h1>
+
+<%= form_with model: @user, url: update_email_path(@user), local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="field">
+    <%= f.label :unconfirmed_email, "新しいメールアドレス" %><br>
+    <%= f.email_field :unconfirmed_email %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "変更をリクエスト" %>
+  </div>
+<% end %>

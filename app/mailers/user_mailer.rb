@@ -5,4 +5,11 @@ class UserMailer < ApplicationMailer
     mail(to: user.email,
          subject: t('defaults.password_reset'))
   end
+
+  def email_change_confirmation(user)
+    @user = user
+    @confirmation_token = user.confirmation_token
+    mail(to: @user.unconfirmed_email,
+         subject: t('defaults.email_change'))
+  end
 end
