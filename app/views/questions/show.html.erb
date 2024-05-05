@@ -26,7 +26,7 @@
           <%= f.radio_button :choice_id, choice.id %>
           <%= choice.content %>
           <% if choice.image.present? %>
-              <%= image_tag choice.image %>
+              <%= image_tag choice.image.url %>
           <% end %>
           </div>
         <% end %>
