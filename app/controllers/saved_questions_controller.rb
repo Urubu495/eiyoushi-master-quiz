@@ -2,6 +2,9 @@ class SavedQuestionsController < ApplicationController
   def index
     @saved_questions = current_user.saved_questions.includes(question: [:category, :question_trend]).order(created_at: :desc).page(params[:page])
 
+    question_ids = @saved_questions.map(&:id)
+    session[:questions] = question_ids unless session[:questions].present?
+
     if params[:category_id].present?
       mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
       @saved_questions = @saved_questions.where(questions: {categories: {id: mid_category_ids}})

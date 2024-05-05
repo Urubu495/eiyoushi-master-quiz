@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  skip_before_action :require_login, only: %i[setting create show index]
+  skip_before_action :require_login, only: %i[setting create show index index37]
 
   def setting; end
 
@@ -7,6 +7,9 @@ class QuestionsController < ApplicationController
 
   def index37
     @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).page(params[:page])
+    
+    question_ids = @questions.map(&:id)
+    session[:questions] = question_ids unless session[:questions].present?
 
     if params[:category_id].present?
       mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
@@ -74,18 +77,23 @@ class QuestionsController < ApplicationController
     @choices = @question.choices
     @trend_level = QuestionTrend.find(@question.question_trend_id).trend_level
 
-    if current_user.present?
+    if current_user.present? && params[:skip_session_process].blank?
       session_id = params[:session_id]
       if session_id.present?
-        @current_session = Session.find(session_id)
+        @current_session = Session.find(session_id) # 問題再開時に実行される
+      elsif session[:current_session_id].present?
+        @current_session = Session.find(session[:current_session_id]) # 問題出題時に実行される
       else
-        @current_session = Session.find(session[:current_session_id])
+        @current_session = session[:questions] # 現状使用することはないが一応残しておく
       end
-      @total_questions = @current_session.session_questions.count
-      @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
-      @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count
+
+      #もし@current_session = session[:questions]を使用する場合、Sessionクラスのインスタンスでなく、エラーが発生するため、条件分岐を追加
+      if @current_session.is_a?(Session)
+        @total_questions = @current_session.session_questions.count
+        @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
+        @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count
+      end
     end
-    
   end        
 
   private
