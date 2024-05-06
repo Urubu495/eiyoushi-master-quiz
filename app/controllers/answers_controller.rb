@@ -40,25 +40,13 @@ def create
   if session_question
     # 回答情報を更新
     session_question.update(is_answered: true, is_correct: choice.is_answer?)
-
     # すべての問題が回答されたかチェック
     current_session = Session.find(session[:current_session_id])
-    if current_session.session_questions.all?(&:is_answered)
-      # すべて回答されていればセッションをcompletedに変更
-      current_session.update(status: :completed)
-    end
+    current_session.complete_if_answered_all!
   end
 
-  if current_user.present?
-    # UserAnswersに回答履歴を追加
-    UserAnswer.create(
-      user_id: current_user.id,
-      question_id: current_question_id,
-      choice_id: choice.id,
-      is_correct: choice.is_answer?,
-      answered_at: Time.current
-    )
-  end
+  # UserAnswersに回答履歴を追加
+  current_user.record_answer!(choice) if current_user.present?
 
   if params[:questions_index].present?
     render turbo_stream: turbo_stream.replace("answer_button", partial: "questions_index")
