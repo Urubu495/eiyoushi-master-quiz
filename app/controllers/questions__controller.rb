@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
 
   def create
     number_of_questions = question_params[:number_of_questions].to_i
+    redirect_to(questions_setting_path, danger: t('questions.create.failure')) and return if question_params[:number_of_questions].blank?
     question_type = question_params[:question_type]
     selected_field_ids = question_params[:category_ids]
 
