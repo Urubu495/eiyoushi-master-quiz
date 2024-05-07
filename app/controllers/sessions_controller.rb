@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  skip_before_action :require_login
 
   def index
     @sessions = current_user.sessions.order(created_at: :desc).page(params[:page])
