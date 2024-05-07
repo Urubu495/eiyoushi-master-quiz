@@ -36,7 +36,7 @@ class Question < ApplicationRecord
     weighted_questions = questions.each_with_object([]) do |question, arr|
       trend_level = question.question_trend.trend_level
       probability = trend_level.to_f / total_trend_level
-      arr << { question: question, weight: (probability * 100).round(2) }
+      arr << { question: question, weight: (probability * 100).round(1) }
     end
 
     selected_questions = []
