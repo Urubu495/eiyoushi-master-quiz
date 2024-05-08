@@ -1,0 +1,7 @@
+<%= @user.name %>様
+
+メールアドレス変更のご依頼を受け付けました。
+
+こちらのリンクから、メールアドレスの変更を確認してください。
+
+<%= confirm_email_url(token: @confirmation_token) %>
