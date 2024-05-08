@@ -8,7 +8,7 @@ class UserAnswer < ApplicationRecord
   private
 
   def check_answers_limit
-    limit = 800
+    limit = 1000
     if user.user_answers.count > limit
       user.user_answers.order(:created_at).first.destroy
     end

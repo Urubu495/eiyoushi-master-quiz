@@ -1,12 +1,15 @@
 class QuestionsController < ApplicationController
-  skip_before_action :require_login, only: %i[setting create show index]
+  skip_before_action :require_login, only: %i[setting create show index index37]
 
   def setting; end
 
   def index; end
 
   def index37
-    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).page(params[:page])
+    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).order(:question_number).page(params[:page])
+    
+    question_ids = @questions.map(&:id)
+    session[:questions] = question_ids unless session[:questions].present?
 
     if params[:category_id].present?
       mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
@@ -16,39 +19,12 @@ class QuestionsController < ApplicationController
 
   def create
     number_of_questions = question_params[:number_of_questions].to_i
+    redirect_to(questions_setting_path, danger: t('questions.create.failure')) and return if question_params[:number_of_questions].blank?
     question_type = question_params[:question_type]
-    questions = Question.all
-    # 選択された分野IDに基づいて、それに属するすべての中項目カテゴリーのIDを取得する
     selected_field_ids = question_params[:category_ids]
-    if selected_field_ids.present?
-      selected_mid_category_ids = Category.where(parent_id: Category.where(parent_id: selected_field_ids).pluck(:id)).pluck(:id)
-      # 取得した中項目のカテゴリーIDに基づいて問題を絞り込む
-      questions = questions.where(category_id: selected_mid_category_ids) if selected_mid_category_ids.present?
-    end
-    
-    case question_type
-    when 'trend'
-      total_trend_level = questions.joins(:question_trend).sum('question_trends.trend_level')
-      weighted_questions = questions.each_with_object([]) do |question, arr|
-        trend_level = question.question_trend.trend_level
-        probability = trend_level.to_f / total_trend_level
-        # ここで、確率*100（整数に近似）で重み付けされた配列を作成する
-        arr << { question: question, weight: (probability * 100).round }
-      end
 
-      selected_questions = []
-      number_of_questions.times do
-        # 重み付けに基づいて問題をランダムに選択する
-        weighted_random_question = weighted_questions.max_by { |q| rand**(1.0/q[:weight]) }
-        selected_questions << weighted_random_question[:question]
-        weighted_questions = weighted_questions.reject { |q| q == weighted_random_question }
-      end
-    when 'random'
-      selected_questions = questions.sample(number_of_questions)
-    else
-      selected_questions = questions.limit(number_of_questions)
-    end
-  
+    selected_questions = Question.select_questions(number_of_questions, question_type, selected_field_ids)
+    
     if current_user.present?
       # セッションを開始
       user_session = Session.create!(user_id: current_user.id, status: 'in_progress', started_at: Time.current)
@@ -74,13 +50,23 @@ class QuestionsController < ApplicationController
     @choices = @question.choices
     @trend_level = QuestionTrend.find(@question.question_trend_id).trend_level
 
-    if current_user.present?
-      @current_session = Session.find(session[:current_session_id])
-      @total_questions = @current_session.session_questions.count
-      @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
-      @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count
+    if current_user.present? && params[:skip_session_process].blank?
+      session_id = params[:session_id]
+      if session_id.present?
+        @current_session = Session.find(session_id) # 問題再開時に実行される
+      elsif session[:current_session_id].present?
+        @current_session = Session.find(session[:current_session_id]) # 問題出題時に実行される
+      else
+        @current_session = session[:questions] # 現状使用することはないが一応残しておく
+      end
+
+      #もし@current_session = session[:questions]を使用する場合、Sessionクラスのインスタンスでなく、エラーが発生するため、条件分岐を追加
+      if @current_session.is_a?(Session)
+        @total_questions = @current_session.session_questions.count
+        @correct_answers = @current_session.session_questions.where(is_answered: true, is_correct: true).count
+        @incorrect_answers = @current_session.session_questions.where(is_answered: true, is_correct: false).count
+      end
     end
-    
   end        
 
   private
