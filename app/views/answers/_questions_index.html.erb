@@ -1,0 +1,4 @@
+<div id="answer_frame">
+<p>正解は<%= @correct_choice_index %>番の選択肢です。</p>
+  <%= button_to "問題一覧へ", questions_index37_path, method: :get, data: { turbo_frame: "answer_frame" }, class: "button-space btn-primary btn-block btn-lg" %>
+</div>

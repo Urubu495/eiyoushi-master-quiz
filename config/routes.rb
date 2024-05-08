@@ -17,7 +17,11 @@ Rails.application.routes.draw do
   resources :answers, only: [:index, :create, :destroy]
   get 'results', to: 'results#show'
   get 'results/before_login_show', to: 'results#before_login_show', as: 'before_login_show'
-  resources :sessions, only: [:index, :destroy]
+  resources :sessions, only: [:index, :destroy] do
+    member do
+      get :resume_session
+    end
+  end
   resources :saved_questions, only: [:index, :create, :destroy]
   get 'correct_answer_rates/rate', to: 'correct_answer_rates#rate', as: 'correct_answer_rate'
 

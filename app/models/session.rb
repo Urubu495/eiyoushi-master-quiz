@@ -6,6 +6,10 @@ class Session < ApplicationRecord
 
   after_create :check_sessions_limit
 
+  def complete_if_answered_all!
+    update(status: :completed) if session_questions.all?(&:is_answered)
+  end
+
   private
 
   def check_sessions_limit
@@ -16,4 +20,5 @@ class Session < ApplicationRecord
       sessions.where(status: :completed).destroy_all
     end
   end
+
 end
