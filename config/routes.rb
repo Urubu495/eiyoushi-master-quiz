@@ -22,4 +22,8 @@ Rails.application.routes.draw do
   get 'correct_answer_rates/rate', to: 'correct_answer_rates#rate', as: 'correct_answer_rate'
 
   resources :password_resets, only: [:new, :create, :edit, :update]
+
+  get '/terms_of_service', to: 'static_pages#terms_of_service'
+  get '/privacy_policy', to: 'static_pages#privacy_policy'
+  get '/inquiry', to: 'static_pages#inquiry'
 end
