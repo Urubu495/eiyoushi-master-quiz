@@ -1,0 +1,45 @@
+<h1>回答履歴一覧</h1>
+
+<%= form_with url: answers_path, method: :get, local: true do |form| %>
+  <div class="row">
+    <div class="col-md-4">
+      <%= form.label :category_id, "分野" %>
+      <%= form.collection_select :category_id, Category.where(parent_id: nil), :id, 
+      ->(category){ t("categories.names.#{category.name}") }, 
+      include_blank: "すべての分野" %>
+    </div>
+    <div class="col-md-4">
+      <%= form.label :is_correct, "正誤" %>
+      <%= form.select :is_correct, [["すべて", ""], ["正解", true], ["不正解", false]], {}, {include_blank: false} %>
+    </div>
+    <div class="col-md-4">
+      <%= form.submit "絞り込み" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+  <% @user_answers.each do |user_answer| %>
+    <div class="row bg-light mb-3">
+      <div class="col-md-3">
+        <p>問題内容: <%= user_answer.question.content.truncate(50) %></p>
+      </div>
+      <div class="col-md-3">
+        <p>分野: <%= t("categories.names.#{user_answer.question.category.root_category.name}") %></p>
+      </div>
+      <div class="col-md-2">
+        <p>正誤: <%= user_answer.is_correct ? '正解' : '不正解' %></p>
+      </div>
+      <div class="col-md-2">
+        <p>回答日時: <%= user_answer.answered_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+      </div>
+      <div class="col-md-1">
+        <%= link_to "問題", question_path(user_answer.question_id), class: 'btn btn-primary' %>
+      </div>
+      <div class="col-md-1">
+        <%= link_to '削除', answer_path(user_answer), data: { turbo_method: :delete}, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate @user_answers, theme: 'bootstrap-5' %>
+</div>

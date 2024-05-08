@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h1>お疲れ様でした! 全問題の回答が終了しました！</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2 class="new-line">以下、全体の回答結果になります</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2>全体の結果</h2>
+      <p>全体の正解数: <%= @total_correct_answers %></p>
+      <p>全体の不正解数: <%= @total_incorrect_answers %></p>
+      <p>全体の正答率: <%= @total_accuracy %>%</p>
+    </div>
+  </div>
+  <div class="row">
+    <% @category_stats.each do |category_name, stats| %>
+      <div class="col-md-6">
+        <h4><%= t("categories.names.#{category_name}") %></h4>
+        <p>正解数: <%= stats[:correct_answers] %></p>
+        <p>不正解数: <%= stats[:incorrect_answers] %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<h1>分野別正答率</h1>
+
+<div class="row">
+  <div class="col-12 text-center bg-light border border-primary new-line">
+    <h3>全体の結果</h3>
+    <p class="text-info font-weight-bold">全体の正解数: <%= @total_correct_answers %></p>
+    <p class="text-danger font-weight-bold">全体の不正解数: <%= @total_incorrect_answers %></p>
+    <p class="text-success font-weight-bold">全体の正答率: <%= @total_accuracy %>%</p>
+    <p class="font-weight-bold">全体の回答数: <%= @total_answered_questions %></p>
+  </div>
+</div>
+
+<div class="row">
+  <% @category_stats.each do |category_name, stats| %>
+    <div class="col-md bg-light border border-primary">
+      <h5><%= t("categories.names.#{category_name}") %></h5>
+      <p class="text-info font-weight-bold">正解数: <%= stats[:correct_answers] %></p>
+      <p class="text-danger font-weight-bold">不正解数: <%= stats[:incorrect_answers] %></p>
+      <p class="text-success font-weight-bold">正答率: <%= stats[:accuracy] %>%</p>
+      <p class="font-weight-bold">回答数: <%= stats[:answered_questions] %></p>
+    </div>
+  <% end %>
+</div>
+
+<div class="row mt-4">
+  <div class="col-md">
+    <%= link_to '問題設定画面に移動する', questions_setting_path, class: 'btn btn-primary btn-lg' %>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<div id="answer_frame">
+  <p>不正解です</p>
+  <p>正解は<%= correct_choice_index %>番の選択肢です。</p>
+  <% if @next_question_id %>
+    <%= button_to "次の問題へ", question_path(@next_question_id), method: :get, data: { turbo_frame: "answer_frame" }, class: "button-space btn-primary btn-block btn-lg" %>
+  <% else %>
+    <%= button_to "結果を見る", results_path, method: :get, data: { turbo_frame: "answer_frame" }, class: "button-space btn-primary btn-block btn-lg" %>
+  <% end %>
+</div>
