@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   def index; end
 
   def index37
-    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).page(params[:page])
+    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).order(:question_number).page(params[:page])
     
     question_ids = @questions.map(&:id)
     session[:questions] = question_ids unless session[:questions].present?
