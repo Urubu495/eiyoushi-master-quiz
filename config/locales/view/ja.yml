@@ -39,6 +39,14 @@ ja:
       login: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
+    create: 
+      success: ログインしました
+      failure: ログインに失敗しました
+    destroy:
+      success: ログアウトしました
+  questions:
+    create:
+      failure: 問題数を設定してください
   categories:
     names:
       '1': '社会・環境と健康'
