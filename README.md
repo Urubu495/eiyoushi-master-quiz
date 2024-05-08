@@ -53,4 +53,4 @@ FacebookやTwitter(X)、InstagramなどのSNSを活用して、管理栄養士�
 https://www.figma.com/file/nK2ehigWkfsLR35VWpkt0m/%E7%AE%A1%E7%90%86%E6%A0%84%E9%A4%8A%E5%A3%AB%E3%80%80%E5%9B%BD%E8%A9%A6%E5%AF%BE%E7%AD%96%E3%82%A2%E3%83%97%E3%83%AA?type=design&node-id=0-1&mode=design&t=q7j9DOfGHlzetpgN-0
 
 ■ ER図
-![ER図](https://github.com/Urubu495/Portfolio/assets/142553581/a810bb9d-6670-4d9f-832f-0ecf0c7cff6c)        
+![ER図](https://github.com/Urubu495/Portfolio/assets/142553581/a810bb9d-6670-4d9f-832f-0ecf0c7cff6c)
