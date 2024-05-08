@@ -14,6 +14,15 @@ class User < ApplicationRecord
   has_many :user_answers
   has_many :comments
 
+  def record_answer!(choice)
+    user_answers.create(
+      question_id: choice.question_id,
+      choice_id: choice.id,
+      is_correct: choice.is_answer?,
+      answered_at: Time.current
+    )
+  end
+
   def generate_confirmation_token
     self.confirmation_token = SecureRandom.urlsafe_base64
     self.confirmed_at = 24.hours.from_now
