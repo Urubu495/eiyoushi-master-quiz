@@ -1,0 +1,50 @@
+<div class='container mt-3'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <h1>問題番号: <%= @question.year.year %> - <%= @question.question_number %></h1>
+      <p>出題傾向: ☆<%= @trend_level %></p>
+      <% if current_user.saved_questions.exists?(question_id: @question.id) %>
+        <%= button_to '保存を解除', saved_question_path(question_id: @question.id), method: :delete, class: 'btn btn-secondary btn-lg' %>
+      <% else %>
+        <%= button_to 'この問題を保存する', saved_questions_path(question_id: @question.id), method: :post, class: 'btn btn-primary btn-lg' %>
+      <% end %>
+    </div>
+  </div>
+  <div class='row mt-2'>
+    <div class='col-md-12'>
+      <p><%= @question.content %></p>
+      <% if @question.image.present? %>
+        <%= image_tag @question.image.url %>
+      <% end %>
+    </div>
+  </div>
+  <div class='row mt-2'>
+    <div class='col-md-12'>
+      <%= form_with url: answers_path, local: false do |f| %>
+        <% @choices.each do |choice| %>
+          <div>
+          <%= f.radio_button :choice_id, choice.id %>
+          <%= choice.content %>
+          <% if choice.image.present? %>
+              <%= image_tag choice.image.url %>
+          <% end %>
+          </div>
+        <% end %>
+        <div id="answer_button">
+          <%= f.submit "回答する", class: 'btn btn-primary btn-block btn-lg' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if current_user.present? %>
+    <div class="row">
+      <div class="col-md-4">問題数: <%= @total_questions %></div>
+      <div class="col-md-4">正解: <%= @correct_answers %></div>
+      <div class="col-md-4">不正解: <%= @incorrect_answers %></div>
+    </div>
+  <% end %>
+  <div class="d-flex justify-content-start">
+    <%= button_to "回答履歴へ", answers_path, method: :get, class: 'btn btn-info btn-lg' %>
+    <%= button_to "保存問題へ", saved_questions_path, method: :get, class: 'btn btn-secondary btn-lg button-space-left' %>
+  </div>
+</div>

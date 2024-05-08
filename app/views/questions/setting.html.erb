@@ -1,0 +1,52 @@
+<div class='container mt-3'>
+  <div class='row'>
+    <div class='col-md-12'>
+    <% if current_user.present? %>
+      <%= link_to '続きから出題', sessions_path %>
+    <% end %>
+      <h2>出題設定</h2>
+    </div>
+  </div>
+  <%= form_with url: questions_create_path, local: true do |form| %>
+    <div class='row mt-2'>
+      <div class='col-md-12'>
+        <%= form.label :number_of_questions, '出題数' %>
+        <%= form.number_field :number_of_questions, in: 1..200 %>
+      </div>
+    </div>
+
+    <div class='row mt-2'>
+      <div class='col-md-12'>
+        <%= form.label :random, 'ランダム出題' %>
+        <%= form.radio_button :question_type, 'random' %>
+      </div>
+    </div>
+
+    <div class='row mt-2'>
+      <div class='col-md-12'>
+        <%= form.label :trend, 'ランダム出題(出題傾向の高い問題を優先)' %>
+        <%= form.radio_button :question_type, 'trend' %>
+      </div>
+    </div>
+    <div class='row mt-2'>
+      <div class='col-md-12 d-flex justify-content-between align-items-center'>
+        <h2>分野設定</h2>
+        <%= link_to '正答率を確認する', correct_answer_rate_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+    <div class='row mt-2'>
+      <div class='col-md-12'>
+        <% Category.where(level: 0).each do |category| %>
+          <%= form.check_box :category_ids, { multiple: true }, category.id, nil %>
+          <%= form.label "category_ids_#{category.id}", t("categories.names.#{category.name}") %><br>
+        <% end %>
+      </div>
+    </div>
+
+    <div class='row mt-2'>
+      <div class='col-md-12'>
+        <%= form.submit '設定を完了して出題開始', class: 'btn btn-primary btn-block' %>
+      </div>
+    </div>
+  <% end %>
+</div>

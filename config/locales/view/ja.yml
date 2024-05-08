@@ -1,0 +1,68 @@
+ja:
+  helpers:
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+    label:
+      email: メールアドレス
+      password: パスワード
+      password_confirmation: パスワード確認
+  defaults:
+    password_reset: パスワードリセット
+    email_change: メールアドレス変更の確認
+  header:
+    home: ホーム
+    login: ログイン
+    logout: ログアウト
+    create: 会員登録
+    name_update: ユーザー名変更
+    email_change: メールアドレス変更
+  users:
+    new:
+      title: 'ユーザー登録'
+      to_login_page: 'ログインページへ'
+    create:
+     success: ユーザーを作成しました
+     failure: ユーザー作成に失敗しました
+    update:
+     success: ユーザー名を変更しました
+    update_email:
+      success: 確認メールを送信しました。メールを確認してください。
+    confirm_email:
+      success: メールアドレスが正しく更新されました。
+      failure: メールアドレスの更新に失敗しました。
+      time_limit: この確認リンクは無効か、すでに期限切れです。
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 登録ページへ
+      password_forget: パスワードをお忘れの方はこちら
+  categories:
+    names:
+      '1': '社会・環境と健康'
+      '2': '人体の構造と機能及び疾病の成り立ち'
+      '3': '食べ物と健康'
+      '4': '基礎栄養学'
+      '5': '応用栄養学'
+      '6': '栄養教育論'
+      '7': '臨床栄養学'
+      '8': '公衆栄養学'
+      '9': '給食経営管理論'
+      '10': '応用力試験'
+  sessions:
+    destroy: '削除しました'
+  saved_questions:
+    create:
+      success: '問題を保存しました。'
+    destroy:
+      success: '問題の保存を解除しました。'
+  password_resets:
+    new:
+      submit: 送信
+    create:
+      success: パスワードリセット手順を送信しました
+    update:
+      success: パスワードを変更しました
+      fail: パスワード変更に失敗しました
