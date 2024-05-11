@@ -46,8 +46,20 @@ FacebookやTwitter(X)、InstagramなどのSNSを活用して、管理栄養士�
 - 問題一覧確認機能
 
 ■ 機能の実装方針予定
+- 本番環境での本番環境でのパスワード、メールアドレス変更機能
 - 大項目別の正答率確認機能
 - 問題へのコメント書き込み機能
+
+■ 使用している技術
+
+| カテゴリ | 技術 |
+| --- | --- |
+| フロントエンド | Hotwire /bootstrap / bootstrap Icons /esbuild /Sass |
+| バックエンド | Ruby 3.2.2 / Rails 7.0.8.1 |
+| データベース | PostgreSQL |
+| 認証 | Sorcery |
+| 環境構築 | Docker / docker-compose |
+| インフラ | heroku |
 
 ■ 画面遷移図
 https://www.figma.com/file/nK2ehigWkfsLR35VWpkt0m/%E7%AE%A1%E7%90%86%E6%A0%84%E9%A4%8A%E5%A3%AB%E3%80%80%E5%9B%BD%E8%A9%A6%E5%AF%BE%E7%AD%96%E3%82%A2%E3%83%97%E3%83%AA?type=design&node-id=0-1&mode=design&t=q7j9DOfGHlzetpgN-0
