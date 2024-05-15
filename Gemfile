@@ -61,6 +61,7 @@ gem 'config'
 gem 'devise'
 gem 'bootstrap5-kaminari-views'
 gem 'whenever', require: false
+gem 'sendgrid-ruby'
 
 # gem "image_processing", "~> 1.2"
 
