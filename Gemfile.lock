@@ -279,14 +279,7 @@ GEM
     ruby-rc4 (0.1.5)
     ruby-vips (2.2.1)
       ffi (~> 1.12)
-<<<<<<< HEAD
-<<<<<<< HEAD
     ruby_http_client (3.5.5)
-=======
->>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
-=======
-    ruby_http_client (3.5.5)
->>>>>>> db65053d3ecd42e58f098266ae49dfc944af0eb0
     rubyzip (2.3.2)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -301,16 +294,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-<<<<<<< HEAD
-<<<<<<< HEAD
     sendgrid-ruby (6.7.0)
       ruby_http_client (~> 3.4)
-=======
->>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
-=======
-    sendgrid-ruby (6.7.0)
-      ruby_http_client (~> 3.4)
->>>>>>> db65053d3ecd42e58f098266ae49dfc944af0eb0
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -386,14 +371,7 @@ DEPENDENCIES
   rails-i18n (~> 7.0.0)
   sassc-rails
   selenium-webdriver
-<<<<<<< HEAD
-<<<<<<< HEAD
   sendgrid-ruby
-=======
->>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
-=======
-  sendgrid-ruby
->>>>>>> db65053d3ecd42e58f098266ae49dfc944af0eb0
   sorcery
   sprockets-rails
   sqlite3
