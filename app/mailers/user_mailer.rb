@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 require 'sendgrid-ruby'
 include SendGrid
 
+=======
+>>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
 class UserMailer < ApplicationMailer
   def reset_password_email(user)
     @user = User.find(user.id)
     @url  = edit_password_reset_url(@user.reset_password_token)
+<<<<<<< HEAD
 
     from = Email.new(email: 'from@example.com')
     to = Email.new(email: @user.email)
@@ -18,11 +22,16 @@ class UserMailer < ApplicationMailer
     Rails.logger.info "SendGrid Response: #{response.status_code}"
     Rails.logger.info response.body
     Rails.logger.info response.headers
+=======
+    mail(to: user.email,
+         subject: t('defaults.password_reset'))
+>>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
   end
 
   def email_change_confirmation(user)
     @user = user
     @confirmation_token = user.confirmation_token
+<<<<<<< HEAD
 
     from = Email.new(email: 'from@example.com')
     to = Email.new(email: @user.unconfirmed_email)
@@ -36,5 +45,9 @@ class UserMailer < ApplicationMailer
     Rails.logger.info "SendGrid Response: #{response.status_code}"
     Rails.logger.info response.body
     Rails.logger.info response.headers
+=======
+    mail(to: @user.unconfirmed_email,
+         subject: t('defaults.email_change'))
+>>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
   end
 end
