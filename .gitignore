@@ -42,11 +42,4 @@
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
-<<<<<<< HEAD
-<<<<<<< HEAD
 sendgrid.env
-=======
->>>>>>> 4a5c4a02f6f6e4de63c0442b342e4de1b1247432
-=======
-sendgrid.env
->>>>>>> db65053d3ecd42e58f098266ae49dfc944af0eb0
