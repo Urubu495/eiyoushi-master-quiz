@@ -474,6 +474,7 @@ Rails.application.config.sorcery.configure do |config|
     # Default: `5 * 60`
     #
     # user.magic_login_time_between_emails =
+    user.reset_password_time_between_emails = 5
 
     # -- brute_force_protection --
     # Failed logins attribute name.

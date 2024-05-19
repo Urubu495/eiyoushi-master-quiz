@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
+  # mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
   root 'top#index'
   resources :users, only: [:new, :create, :edit, :update]
   get 'edit_email', to: 'users#edit_email'
