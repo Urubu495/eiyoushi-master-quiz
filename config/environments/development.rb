@@ -41,7 +41,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :letter_opener_web
+  config.action_mailer.delivery_method = :sendgrid
+  
   config.action_mailer.default_url_options = Settings.default_url_options.to_h
 
   # Print deprecation notices to the Rails logger.
@@ -70,4 +71,16 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  config.action_mailer.smtp_settings = {
+    :user_name      => 'apikey',
+    :password       => ENV['SENDGRID_API_KEY'],
+    :domain => 'herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+    }
+
+    puts "SENDGRID_API_KEY: #{ENV['SENDGRID_API_KEY']}"
 end
