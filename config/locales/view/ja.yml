@@ -29,6 +29,7 @@ ja:
      success: ユーザー名を変更しました
     update_email:
       success: 確認メールを送信しました。メールを確認してください。
+      failure: 確認メール送信に失敗しました
     confirm_email:
       success: メールアドレスが正しく更新されました。
       failure: メールアドレスの更新に失敗しました。

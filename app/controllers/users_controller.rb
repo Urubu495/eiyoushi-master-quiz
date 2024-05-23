@@ -37,11 +37,12 @@ class UsersController < ApplicationController
       @user = current_user
       @user.unconfirmed_email = params[:user][:unconfirmed_email] # 新しいメールアドレスを一時カラムに保存
       
-      if @user.save
+      if @user.unconfirmed_email.present? && @user.save
         @user.generate_confirmation_token # 確認トークンを生成
         UserMailer.email_change_confirmation(@user).deliver_now # 確認メールを送信
         redirect_to root_path, success: t('users.update_email.success')
       else
+        flash.now[:danger] = t('users.update_email.failure')
         render :edit_email
       end
     end
