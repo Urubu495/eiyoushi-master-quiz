@@ -65,7 +65,7 @@ end
 def destroy
   user_answer = current_user.user_answers.find(params[:id])
   user_answer.destroy
-  redirect_to answers_path, danger: t('user_answers.destroy.success')
+  redirect_to answers_path, danger: t('user_answers.destroy')
 end
 
 end

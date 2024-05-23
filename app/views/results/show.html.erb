@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12 text-center">
+    <div class="col-12 text-center mb-3 bg-light">
       <h2>全体の結果</h2>
       <p class="text-info font-weight-bold">全体の正解数: <%= @total_correct_answers %></p>
       <p class="text-danger font-weight-bold">全体の不正解数: <%= @total_incorrect_answers %></p>
@@ -19,11 +19,15 @@
   </div>
   <div class="row">
     <% @category_stats.each do |category_name, stats| %>
-      <div class="col-md-6 mb-3">
+      <div class="col-md-6 mb-3 bg-light">
         <h4><%= t("categories.names.#{category_name}") %></h4>
         <p class="text-info font-weight-bold">正解数: <%= stats[:correct_answers] %></p>
         <p class="text-danger font-weight-bold">不正解数: <%= stats[:incorrect_answers] %></p>
       </div>
     <% end %>
+  </div>
+  <div class='col-md mb-2'>
+      <%= link_to 'ホーム画面へ戻る', root_path, class: 'btn btn-primary btn-block btn-lgalign-items-center justify-content-center' %>
+    </div>
   </div>
 </div>

@@ -59,6 +59,8 @@ ja:
       '8': '公衆栄養学'
       '9': '給食経営管理論'
       '10': '応用力試験'
+  user_answers:
+    destroy: '削除しました'
   sessions:
     destroy: '削除しました'
   saved_questions:
