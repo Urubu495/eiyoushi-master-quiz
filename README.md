@@ -54,7 +54,7 @@ FacebookやTwitter(X)、InstagramなどのSNSを活用して、管理栄養士�
 
 | カテゴリ | 技術 |
 | --- | --- |
-| フロントエンド | Hotwire /bootstrap / bootstrap Icons /esbuild /Sass |
+| フロントエンド | Hotwire /bootstrap / bootstrap Icons /esbuild /SCSS |
 | バックエンド | Ruby 3.2.2 / Rails 7.0.8.1 |
 | データベース | PostgreSQL |
 | 認証 | Sorcery |
