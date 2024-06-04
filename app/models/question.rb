@@ -38,9 +38,11 @@ class Question < ApplicationRecord
       probability = trend_level.to_f / total_trend_level
       arr << { question: question, weight: (probability * 100).round(1) }
     end
-
+  
     selected_questions = []
-    number_of_questions.times do
+    number_of_questions_to_select = [number_of_questions, weighted_questions.size].min
+  
+    number_of_questions_to_select.times do
       weighted_random_question = weighted_questions.max_by { |q| rand**(1.0 / q[:weight]) }
       selected_questions << weighted_random_question[:question]
       weighted_questions = weighted_questions.reject { |q| q == weighted_random_question }
