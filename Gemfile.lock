@@ -52,6 +52,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.8.1)
       activesupport (= 7.0.8.1)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.8.1)
       activemodel (= 7.0.8.1)
       activesupport (= 7.0.8.1)
@@ -110,6 +114,7 @@ GEM
     crass (1.0.6)
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
+    csv (3.3.0)
     date (3.3.4)
     debug (1.9.1)
       irb (~> 1.10)
@@ -121,6 +126,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (3.1.2)
+    dotenv-rails (3.1.2)
+      dotenv (= 3.1.2)
+      railties (>= 6.1)
     erubi (1.12.0)
     execjs (2.9.1)
     faraday (2.9.0)
@@ -190,6 +199,7 @@ GEM
     minitest (5.22.3)
     msgpack (1.7.2)
     multi_xml (0.6.0)
+    nested_form (0.3.2)
     net-http (0.4.1)
       uri
     net-imap (0.4.10)
@@ -259,6 +269,13 @@ GEM
     rails-i18n (7.0.9)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
+    rails_admin (3.2.0.beta)
+      activemodel-serializers-xml (>= 1.0)
+      csv
+      kaminari (>= 0.14, < 2.0)
+      nested_form (~> 0.3)
+      rails (>= 6.0, < 8)
+      turbo-rails (>= 1.0, < 3)
     railties (7.0.8.1)
       actionpack (= 7.0.8.1)
       activesupport (= 7.0.8.1)
@@ -320,7 +337,7 @@ GEM
     timeout (0.4.1)
     ttfunk (1.8.0)
       bigdecimal (~> 3.1)
-    turbo-rails (2.0.5)
+    turbo-rails (2.0.6)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -359,6 +376,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  dotenv-rails
   jbuilder
   jquery-rails
   jsbundling-rails
@@ -369,6 +387,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.1)
   rails-i18n (~> 7.0.0)
+  rails_admin
   sassc-rails
   selenium-webdriver
   sendgrid-ruby
