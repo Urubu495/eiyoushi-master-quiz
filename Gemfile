@@ -62,6 +62,8 @@ gem 'devise'
 gem 'bootstrap5-kaminari-views'
 gem 'whenever', require: false
 gem 'sendgrid-ruby'
+gem 'rails_admin'
+gem 'dotenv-rails'
 
 # gem "image_processing", "~> 1.2"
 
@@ -88,3 +90,4 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+gem "sassc-rails"
