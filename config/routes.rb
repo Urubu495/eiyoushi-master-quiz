@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'questions/setting', to: 'questions#setting', as: 'questions_setting'
   post 'questions/create', to: 'questions#create', as: 'questions_create'
   get 'questions/index37', to: 'questions#index37', as: 'questions_index37'
+  get 'questions/index36', to: 'questions#index36', as: 'questions_index36'
   resources :questions, only: [:show, :index]
   resources :answers, only: [:index, :create, :destroy]
   get 'results', to: 'results#show'

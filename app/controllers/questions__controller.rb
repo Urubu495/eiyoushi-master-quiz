@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  skip_before_action :require_login, only: %i[setting create show index index37]
+  skip_before_action :require_login, only: %i[setting create show index index37 index36]
 
   def setting; end
 
@@ -7,6 +7,18 @@ class QuestionsController < ApplicationController
 
   def index37
     @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 37 }).order(:question_number).page(params[:page])
+    
+    question_ids = @questions.map(&:id)
+    session[:questions] = question_ids unless session[:questions].present?
+
+    if params[:category_id].present?
+      mid_category_ids = Category.where(parent_id: Category.where(parent_id: params[:category_id]).pluck(:id)).pluck(:id)
+      @questions = @questions.where(questions: {categories: {id: mid_category_ids}})
+    end
+  end
+
+  def index36
+    @questions = Question.includes(:year, :question_trend, :category).joins(:year).where(years: { year: 36 }).order(:question_number).page(params[:page])
     
     question_ids = @questions.map(&:id)
     session[:questions] = question_ids unless session[:questions].present?

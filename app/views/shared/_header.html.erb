@@ -4,6 +4,8 @@
     <!-- ホーム画面へ戻るボタン -->
     <%= link_to t('header.home'), root_path, class: "navbar-brand" %>
 
+    <button onclick="window.history.back();" class="btn-lg ms-3">戻る</button>
+
     <!-- ユーザー名の表示 -->
       <div class="navbar-text mx-auto">
         <%= current_user.name %>
