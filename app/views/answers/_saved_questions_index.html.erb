@@ -1,4 +1,4 @@
 <div id="answer_frame">
 <p>正解は<%= @correct_choice_index %>番の選択肢です。</p>
-  <%= button_to "保存問題へ", saved_questions_path, method: :get, data: { turbo_frame: "answer_frame" }, class: "button-space btn-primary btn-block btn-lg" %>
+  <button onclick="window.history.back();" class="button-space btn-primary btn-block btn-lg">保存問題へ</button>
 </div>
